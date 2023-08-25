@@ -37,9 +37,11 @@ public class FlowerController {
 
     @PostMapping("buy")
     public void buyFlower (@RequestParam("flowerId") Long flowerId, @RequestParam("quantity") Integer quantity) {
-        flowerService.buyFlower(flowerId, quantity);
+        if (!flowerService.buyFlower(flowerId, quantity)){
+            return;
+        }
         Flower flowerToAddInOrder = flowerService.findFlowerById(flowerId);
-        Order order = new Order((long)orderService.getOrderList().size(),quantity,flowerToAddInOrder.getPrice()*quantity,flowerToAddInOrder);
+        Order order = new Order((long)orderService.getOrderList().size(),quantity,flowerToAddInOrder.getPrice()*quantity,flowerId);
         orderService.saveOrder(order);
     }
 }

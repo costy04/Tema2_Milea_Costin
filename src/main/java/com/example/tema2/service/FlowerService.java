@@ -37,7 +37,7 @@ public class FlowerService {
         }
     }
 
-    public void buyFlower (Long flowerId, Integer quantity) {
+    public boolean buyFlower (Long flowerId, Integer quantity) {
         Flower selectedFlower = null;
         for (Flower flowerItr : flowerList) {
             if (flowerItr.getId().equals(flowerId)) {
@@ -45,9 +45,10 @@ public class FlowerService {
                 break;
             }
         }
-        if (selectedFlower == null | selectedFlower.getStock() < quantity) return;
+        if (selectedFlower == null | selectedFlower.getStock() < quantity) return false;
 
         selectedFlower.setStock(selectedFlower.getStock() - quantity);
+        return true;
 
     }
 

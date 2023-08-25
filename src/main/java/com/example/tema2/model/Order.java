@@ -12,5 +12,5 @@ public class Order {
     private Long id;
     private Integer quantity;
     private Double totalPrice;
-    private Flower flowerPurchased;
+    private Long flowerId;
 }
